@@ -18,7 +18,7 @@ class CronController extends \yii\console\Controller
 	public function actionIndex()
 	{
 		$file = FileHelper::findFiles('backend\web\upload', ['only'=>['*.xls']]);
-        require_once '/Classes/PHPExcel.php';
+        require_once '/PClasses/PHPExcel.php';
         $pExcel = \PHPExcel_IOFactory::load($file[0].'');
         foreach ($pExcel->getWorksheetIterator() as $worksheet) {
             $tables = $worksheet->toArray();
@@ -36,6 +36,6 @@ class CronController extends \yii\console\Controller
         }
         Yii::$app->db->createCommand()->batchInsert('excel', ['id', 'name', 'card_number', 'description', 'user_id'], $models)->execute();
         return true;
-		//$this->stdout('SSSSSSSSSSSSSSS'."\n", Console::FG_GREEN);
+		/*$this->stdout('SSSSSSSSSSSSSSS'."\n", Console::FG_GREEN);*/
 	}
 }
