@@ -1,0 +1,255 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300&subset=latin,cyrillic);
+@font-face {
+    font-family: 'Roboto', sans-serif; /* Имя шрифта */
+    src: url(https://fonts.googleapis.com/css?family=Roboto+Mono&subset=latin,cyrillic); /* Путь к файлу со шрифтом */
+   }
+html,
+body {
+    height: 100%;
+    font-family: Roboto;
+    overflow-x: hidden;
+    font-size: 10px;
+    font-weight: 300;
+}
+h1.*,h2.*,h3.*,h4.*,h5.*,h5.*,
+h1,h2,h3,h4,h5,h5{
+    font-family: Roboto;
+    font-weight: 300;
+}
+a:focus{
+    text-decoration: none;
+    outline-offset:0;
+    outline:none;
+}
+.wrap {
+    min-height: 100%;
+    height: auto;
+    margin: 0 auto -60px;
+    padding: 0 0 60px;
+}
+.clear{
+    clear: both;
+}
+
+.wrap > .container {
+    padding: 70px 15px 20px;
+}
+
+header{
+    border-bottom: 1px solid #4758a5;
+}
+header .logo > h1{
+    vertical-align: middle;
+    font-size: 2.4rem;
+    display: block;
+    font-weight: 300;
+    color: #4758a5;
+}
+header .logo > h1 > img{
+    display: inline;
+}
+header .nav{
+    margin-top: 2rem;
+}
+header .nav ul{
+    display: inline-flex;
+    list-style: none;
+}
+header .nav ul > li > a{
+    font-size: 1.4rem;
+    padding: 5px 7px;
+    font-size: 2rem;
+    color: #404040;
+    font-weight: 300;
+}
+header .nav ul > li > a:hover{
+    text-decoration: none;
+    color: #4758a5;
+}
+
+
+.introduction{
+    padding-bottom: 13rem;
+}
+.introduction > .container{
+    border-bottom:1px solid #4758a5;
+    border-left:1px solid #4758a5;
+    border-right:1px solid #4758a5;
+    padding: 0;
+}
+.introduction > .container .my_wrapepr_img{
+    position: relative;
+    width: 100%;
+    background-image: url(../images/my_wrapper.jpg);
+    background-size: cover;
+    padding: 6rem 0; 
+}
+.introduction > .container .my_wrapepr_img .my_label{
+    margin-left:-15px;
+    position: relative;
+    padding: 2rem 2.4rem;
+    font-size: 4rem;
+    color: white;
+    background: rgba(129,155,232,0.7);
+    border-radius: 0;
+    display: inline-flex;
+}
+.introduction > .container .my_wrapepr_img .my_label:after{
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 100%;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 15.5rem 20px 0 0;
+    border-color: rgba(129,155,232,0.7) transparent transparent transparent;
+}
+@media screen and (max-width: 500px) {
+   .introduction > .container .my_wrapepr_img .my_label:after{
+        display: none; 
+        content: none;
+   }
+}
+.introduction > .container .my_wrapepr_img .links{
+    bottom: 0;
+}
+.introduction > .container .my_wrapepr_img .links .gstore{
+    background: url(../images/p_market.png);
+    background-size: cover;
+    width: 26rem;
+    height: 6.7rem;
+    border: none;
+    border-radius: 0;
+    margin: 1rem;
+}
+.introduction > .container .my_wrapepr_img .links .istore{
+    background: url(../images/a_store.png);
+    background-size: cover;
+    width: 26rem;
+    height: 6.7rem;
+    border: none;
+    border-radius: 0;
+    margin: 1rem;
+}
+.introduction > .container .my_wrapepr_img .all_in_r_hand{
+    margin-bottom: -6rem;
+}
+.introduction > .container .card img{
+    border: 1px solid #4758a5;
+    border-radius: 150px;
+    padding:1rem;
+    background: white;
+    margin-bottom: -13rem; 
+}
+@media screen and (max-width: 991px) {
+   .introduction > .container .card img{
+        margin-bottom: 0rem; 
+   }
+   .introduction{
+        padding-bottom: 0rem;
+    }
+}
+
+
+
+
+
+.for_users > .container{
+    border: 1px solid #e6e6e6;
+    margin-top: 5.5rem;
+}
+.for_users > .container .gstore{
+    background: url(../images/p_market.png);
+    background-size: cover;
+    width: 26rem;
+    height: 6.7rem;
+    border: none;
+    border-radius: 0;
+    margin: 1rem;
+}
+.for_users > .container .istore{
+    background: url(../images/a_store.png);
+    background-size: cover;
+    width: 26rem;
+    height: 6.7rem;
+    border: none;
+    border-radius: 0;
+    margin: 1rem;
+}
+.for_users > .container h2{
+    color:#ff7900;
+    font-size: 2rem;
+    padding: 1rem 0rem 1rem 3rem; 
+    display: block;
+}
+.for_users > .container .line_decor{
+    font-size: 1.6rem;
+    padding: 1rem 0rem 1rem 3rem; 
+    display: block;
+}
+.for_users > .container > .row .app_img{
+    margin-top: 10rem; 
+}
+@media screen and (max-width: 991px) {
+    .for_users > .container > .row .app_img{
+        margin-top: 3rem; 
+    }
+}
+
+
+
+
+
+
+
+
+
+.contact header{
+    border-bottom: none;
+}
+.contact header h2{
+    color:#ff7900;
+    font-size: 2rem;
+    padding: 1rem 0rem 1rem 3rem; 
+    display: block;
+}
+.contact header p{
+    color:#404040;
+    font-size: 1.4rem;
+    padding: 1rem 0rem 1rem 3rem; 
+    display: block;
+}
+.contact .btn.btn-success{
+    border: 1px solid #819be8;
+    background-color: #819be8;
+}
+.contact .btn.btn-success:hover{
+    background-color: #a2b9ff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.footer {
+    border-top: 1px solid #4758a5;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+    color: #4758a5;
+    font-size: 1.4rem;
+}
+.footer ul{
+    padding: 0; 
+}
+.footer ul li{
+    list-style: none;
+}
