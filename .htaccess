@@ -1,14 +1,4 @@
 <IfModule mod_rewrite.c>
-    RewriteEngine On
-    #RewriteCond %{HTTPS} =off
-    #RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [QSA,L]
-    #RewriteCond %{HTTPS} !=on
-    #RewriteCond %{HTTP_HOST} =cars14.su
-    #RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [QSA,L]
-    #RewriteCond %{REQUEST_URI} =/car/car/pay_aviso_test
-    #RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [QSA,L]
-</IfModule>
-<IfModule mod_rewrite.c>
     Options +FollowSymlinks
     RewriteEngine On
 </IfModule>

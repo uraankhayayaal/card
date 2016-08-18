@@ -3,8 +3,8 @@ return [
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=yii2advanced',
-            'username' => 'root',
+            'dsn' => 'mysql:host=localhost;dbname=u0195776_card',
+            'username' => 'u0195776_card',
             'password' => '',
             'charset' => 'utf8',
         ],
