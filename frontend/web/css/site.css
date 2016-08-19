@@ -10,6 +10,9 @@ body {
     overflow-x: hidden;
     font-size: 10px;
     font-weight: 300;
+    background: #efefef;
+    /*background: url(../images/pat.png);
+    background-position: center;*/
 }
 h1.*,h2.*,h3.*,h4.*,h5.*,h5.*,
 h1,h2,h3,h4,h5,h5{
@@ -36,7 +39,7 @@ a:focus{
 }
 
 header{
-    border-bottom: 1px solid #4758a5;
+    /*border-bottom: 1px solid #4758a5;*/
 }
 header .logo > h1{
     vertical-align: middle;
@@ -49,40 +52,49 @@ header .logo > h1 > img{
     display: inline;
 }
 header .nav{
-    margin-top: 2rem;
+    margin-top: 3rem;
 }
 header .nav ul{
     display: inline-flex;
     list-style: none;
 }
 header .nav ul > li > a{
-    font-size: 1.4rem;
     padding: 5px 7px;
-    font-size: 2rem;
-    color: #404040;
+    font-size: 1.6rem;
+    color: #ff4d4d;
     font-weight: 300;
 }
 header .nav ul > li > a:hover{
-    text-decoration: none;
-    color: #4758a5;
+    text-decoration: underline;
+    color: #ee6e73;
 }
 
 
 .introduction{
     padding-bottom: 13rem;
 }
+
+
+.introduction h3{
+    color: #ff4d4d;
+}
+
 .introduction > .container{
-    border-bottom:1px solid #4758a5;
+    /*border-bottom:1px solid #4758a5;
     border-left:1px solid #4758a5;
-    border-right:1px solid #4758a5;
+    border-right:1px solid #4758a5;*/
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     padding: 0;
+    background: white;
+    padding-bottom: 3rem;
 }
 .introduction > .container .my_wrapepr_img{
     position: relative;
     width: 100%;
     background-image: url(../images/my_wrapper.jpg);
     background-size: cover;
-    padding: 6rem 0; 
+    background-position: center;
+    padding: 6rem 0;
 }
 .introduction > .container .my_wrapepr_img .my_label{
     margin-left:-15px;
@@ -114,7 +126,9 @@ header .nav ul > li > a:hover{
 }
 .introduction > .container .my_wrapepr_img .links{
     bottom: 0;
+    
 }
+
 .introduction > .container .my_wrapepr_img .links .gstore{
     background: url(../images/p_market.png);
     background-size: cover;
@@ -123,6 +137,12 @@ header .nav ul > li > a:hover{
     border: none;
     border-radius: 0;
     margin: 1rem;
+    border-radius: 0.8rem;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+.introduction > .container .my_wrapepr_img .links .gstore:hover{
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 .introduction > .container .my_wrapepr_img .links .istore{
     background: url(../images/a_store.png);
@@ -132,17 +152,25 @@ header .nav ul > li > a:hover{
     border: none;
     border-radius: 0;
     margin: 1rem;
+    border-radius: 0.8rem;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+.introduction > .container .my_wrapepr_img .links .istore:hover{
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 .introduction > .container .my_wrapepr_img .all_in_r_hand{
     margin-bottom: -6rem;
 }
 .introduction > .container .card img{
-    border: 1px solid #4758a5;
+    /*border: 1px solid #4758a5;*/
     border-radius: 150px;
     padding:1rem;
     background: white;
-    margin-bottom: -13rem; 
+    margin-bottom: -13rem;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
+
 @media screen and (max-width: 991px) {
    .introduction > .container .card img{
         margin-bottom: 0rem; 
@@ -157,8 +185,11 @@ header .nav ul > li > a:hover{
 
 
 .for_users > .container{
-    border: 1px solid #e6e6e6;
+    /*border: 1px solid #e6e6e6;*/
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     margin-top: 5.5rem;
+    background: white;
+    padding-bottom: 2rem;
 }
 .for_users > .container .gstore{
     background: url(../images/p_market.png);
@@ -166,8 +197,13 @@ header .nav ul > li > a:hover{
     width: 26rem;
     height: 6.7rem;
     border: none;
-    border-radius: 0;
+    border-radius: 0.8rem;
     margin: 1rem;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+.for_users > .container .gstore:hover{
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 .for_users > .container .istore{
     background: url(../images/a_store.png);
@@ -175,26 +211,46 @@ header .nav ul > li > a:hover{
     width: 26rem;
     height: 6.7rem;
     border: none;
-    border-radius: 0;
     margin: 1rem;
+    border-radius: 0.8rem;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+.for_users > .container .istore:hover{
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 .for_users > .container h2{
     color:#ff7900;
     font-size: 2rem;
-    padding: 1rem 0rem 1rem 3rem; 
+    padding: 1rem 3rem 1rem 3rem; 
     display: block;
 }
 .for_users > .container .line_decor{
     font-size: 1.6rem;
-    padding: 1rem 0rem 1rem 3rem; 
+    padding: 1rem 3rem 1rem 3rem; 
     display: block;
 }
-.for_users > .container > .row .app_img{
-    margin-top: 10rem; 
+.for_users > .container .phone_stack{
+    position: relative;
+}
+.for_users > .container > .row .iosapp_img{
+    margin-top: 7rem; 
+    position: absolute;
+    width: 15rem;
+    left:50%;
+    margin-left: -5rem;
+}
+.for_users > .container > .row .andapp_img{
+    margin-top: 5rem; 
+    position: absolute;
+    left:50%;
+    margin-left: -15rem;
+    width: 15rem;
 }
 @media screen and (max-width: 991px) {
-    .for_users > .container > .row .app_img{
+    .for_users > .container .phone_stack{
         margin-top: 3rem; 
+        padding-bottom: 28rem;
     }
 }
 
@@ -206,6 +262,11 @@ header .nav ul > li > a:hover{
 
 
 
+.contact .container{
+    margin-top: 15.5rem;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    background: white;
+}
 .contact header{
     border-bottom: none;
 }
@@ -222,11 +283,14 @@ header .nav ul > li > a:hover{
     display: block;
 }
 .contact .btn.btn-success{
-    border: 1px solid #819be8;
-    background-color: #819be8;
+    border: none;
+    background-color: #4db6ac;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
 .contact .btn.btn-success:hover{
-    background-color: #a2b9ff;
+    //background-color: #a2b9ff;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
 
@@ -241,15 +305,29 @@ header .nav ul > li > a:hover{
 
 
 .footer {
-    border-top: 1px solid #4758a5;
+    margin-top: 5.5rem;
+    /*border-top: 1px solid #4758a5;*/
     padding-top: 2rem;
-    padding-bottom: 1rem;
     color: #4758a5;
     font-size: 1.4rem;
+    background: #ee6e73;
 }
 .footer ul{
     padding: 0; 
 }
 .footer ul li{
     list-style: none;
+    color:white;
+}
+.footer ul li a{
+    color:white;
+}
+.footer.footer-copyright{
+    padding-top: 1rem;
+    margin-top: 0rem;
+    background: #ff6666;
+    padding-bottom: 1rem;
+}
+.footer.footer-copyright .bg{
+    background-color: #ff4d4d;
 }

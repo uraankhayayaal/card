@@ -33,7 +33,7 @@ $this->title = 'DTY Card Картмоне - дисконтные карты в �
                         </div>
                         <div class="clear"></div>
                         <div class="links">
-                            <a href="#" class="btn gstore"></a>
+                            <a target="_blank" href="https://play.google.com/store/apps/details?id=ru.admin14.dtycard" class="btn gstore"></a>
                             <a href="#" class="btn istore"></a>
                             <div class="clear"></div>
                         </div>
@@ -48,7 +48,7 @@ $this->title = 'DTY Card Картмоне - дисконтные карты в �
                 <div class="clear"></div>
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-center">
                     <div class="card install">
-                        <h3>УСТАНОВИ ПРИЛОЖЕНИЕ</h3>
+                        <h3>УСТАНОВИ</h3>
                         <p class="h4">Набери в поиске "КАРТМОНЕ"</p>
                         <img src="/images/install.png" alt="">
                     </div>
@@ -78,18 +78,19 @@ $this->title = 'DTY Card Картмоне - дисконтные карты в �
 
         <section class="for_users">
             <div class="container">
-                <div class="row">
+                <div class="row text-center">
                     <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 content_block">
                         <h2>БЕСПЛАТНОЕ ОПТИМИЗИРОВАННОЕ ПРИЛОЖЕНИЕ</h2>
                         <br />
                         <span class="line_decor">Используйте мобильный телефон вместо пластиковых карт</span>
                         <span class="line_decor">Будьте в курсе всех акций ваших любимых магазинов</span>
                         <div class="clear"></div>
-                        <a href="#" class="btn gstore"></a>
+                        <a target="_blank" href="https://play.google.com/store/apps/details?id=ru.admin14.dtycard" class="btn gstore"></a>
                         <a href="#" class="btn istore"></a>
                     </div>
-                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                        <img src="/images/app.png" class="img-responsive app_img" alt="Картмоне">
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 phone_stack">
+                        <img src="/images/andapp.png" class="img-responsive andapp_img" alt="Картмоне">
+                        <img src="/images/iosapp.png" class="img-responsive iosapp_img" alt="Картмоне">
                         <div class="clear"></div>
                     </div>
                 </div>
@@ -120,7 +121,7 @@ $this->title = 'DTY Card Картмоне - дисконтные карты в �
                             <input type="submit" class="btn btn-default" value="Отправить" />
                         </div>
                     </form>-->
-                    <div class="contact">
+                    <div class="contact row col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10 col-xs-12">
                         <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
 
                         <div class="row">
@@ -165,17 +166,31 @@ $this->title = 'DTY Card Картмоне - дисконтные карты в �
                     <ul>
                         <li class="pull-left text-left">
                             <a target="_blank" href="/privacy">Разрешение на обработку персональных данных</a><br/>
-                            По всем другим вопросам обращаться: <a href="mailto:info@dty.su" target="_top">info@dty.su</a><br/>
                         </li>
                         <li class="pull-right text-right">
                             <a target="_blank" href="/terms">Пользовательское соглашение</a><br/>
-                            Card DTY Картмоне, <a target="_blank" href="http://dty.su">&copy; Цифровые технологии Якутии, <?= date(Y) ?></a>
                         </li>
                         <div class="clear"></div>
                     </ul>
                     <div class="clear"></div>
                 </div>
                 <div class="clear"></div>
+            </section>
+            <section class="footer footer-copyright text-center">
+                <div class="bg">
+                </div>
+                <div class="container">
+                    <ul>
+                        <li class="pull-left text-left">
+                            По всем другим вопросам обращаться: <a href="mailto:info@dty.su" target="_top">info@dty.su</a><br/>
+                        </li>
+                        <li class="pull-right text-right">
+                            Card DTY Картмоне, <a target="_blank" href="http://dty.su">&copy; Цифровые технологии Якутии, <?= date(Y) ?></a>
+                        </li>
+                        <div class="clear"></div>
+                    </ul>
+                    <div class="clear"></div>
+                </div>
             </section>
             <div class="clear"></div>
 
