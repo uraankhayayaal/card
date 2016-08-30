@@ -53,6 +53,9 @@ class Usercard extends \yii\db\ActiveRecord
     public function validateHozMarket($attribute, $params)
     {
         if ($this->type == 1) {
+            if (strlen($this->barCode) < 5) {
+                $this->barCode = str_pad($this->barCode, 5, "0", STR_PAD_LEFT);
+            }
             if (Excel::find()->where(['card_number' => $this->barCode])->andFilterWhere(['like', 'name', $this->lastname])->exists()) {
                 return true;
             }
