@@ -34,6 +34,7 @@ class UsercardController extends ActiveController
         unset($actions['index']);
         unset($actions['create']);
         unset($actions['update']);
+        unset($actions['delete']);
         return $actions;
     }
 
@@ -64,6 +65,16 @@ class UsercardController extends ActiveController
         } else {
             \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             return ['error' => $model->getErrors()];
+        }
+    }
+
+    public function actionDelete($id)
+    {
+        if ($a = Usercard::find()->where(['user_id' => Yii::$app->user->identity->id, 'id' => $id])->one()) {
+            $this->findModel($id)->delete();
+            return true;
+        } else {
+            return false;
         }
     }
     

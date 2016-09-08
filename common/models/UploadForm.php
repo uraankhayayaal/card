@@ -16,7 +16,7 @@ class UploadForm extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'xls'],
+            [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'json'],
         ];
     }
     

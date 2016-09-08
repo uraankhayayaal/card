@@ -9,6 +9,7 @@ use yii\web\UploadedFile;
 use common\models\Excel;
 use common\models\UploadForm;
 use yii\db\QueryBuilder;
+use yii\helpers\Json;
 
 /**
  * Site controller
@@ -61,7 +62,7 @@ class ExcelController extends Controller
         return $this->render('index');
     }
     
-    public function actionImport()
+    /*public function actionImport()
     {
         $UpForm = new UploadForm();
         require_once 'Classes/PHPExcel.php';
@@ -94,5 +95,98 @@ class ExcelController extends Controller
                 'UpForm' => $UpForm,
             ]);
         }
+    }*/
+
+    public function actionImport()
+    {
+        $UploadForm = new UploadForm();
+        if (Yii::$app->request->isPost) {
+            $UploadForm->imageFile = UploadedFile::getInstance($UploadForm, 'imageFile');
+            $fileName = $UploadForm->imageFile->name = time()."_".$UploadForm->imageFile->name;
+            if ($UploadForm->upload()) {
+                $file = file_get_contents('upload/'.$fileName);
+                $file = iconv('cp1251','utf-8',$file);
+                $file = Json::decode($file);
+                var_dump($file);
+                die();
+            }
+        } else {
+            return $this->render('import', [
+                'UploadForm' => $UploadForm,
+            ]);
+        }
     }
+/*
+$file = file_get_contents('C:\OpenServer\domains\hozmarket.dty.local\frontend\views\site\goods.json');
+$file = iconv('cp1251','utf-8',$file);
+$file = Json::decode($file);
+
+function get_child($arr, $lvl = 0, $parent_name = '', $parent_id = 0) {
+    if (is_array($arr)) {
+        foreach ($arr as $key => $value) {
+            if (is_array($value))$res .= get_child($value, $lvl+1, $parent_name, $parent_id);
+            if (is_string($value)) {
+                if (isset($arr['name'])) {
+                    echo '<div class="row">';
+                    echo '<div class="col-lg-12">';
+                    echo 'Имя родителя: ' . $parent_name . '<br>';
+                    echo 'ID родителя: ' . $parent_id . '<br>';
+                    echo 'Уровень: ' . $lvl . ' | Категория: ' . $arr['name'] . '<br>';
+                    
+                    $parent_name = ($arr['name']);
+                    $category = new Category();
+                    $category->name = $arr['name'];
+                    $category->parent_id = $parent_id;
+                    if (!$category->save()) {
+                        echo 'Ошибка: '; var_dump($category);
+                    }
+                    $parent_id = $category->id;
+
+                    echo '</div>';
+                    echo '</div>';
+                    echo "-------------------------------------------------------------------------------------------------------------------------------------------------";
+                }
+                if (isset($arr['ОсновнойШтрихКод'])) {
+                    echo '<div class="row">';
+                    echo '<div class="col-lg-12">';
+                    if (stristr($arr['Товар'], 'АКЦИЯ')) {
+                        echo 'Акция: Да<br>';
+                    } else {
+                        echo 'Акция: Нет<br>';
+                    }
+                    echo 'Имя родителя: ' . $parent_name . '<br>';
+                    echo 'ID родителя: ' . $parent_id . '<br>';
+                    echo 'ОсновнойШтрихКод: '. $arr['ОсновнойШтрихКод'] . "<br>";
+                    echo 'ТоварКод: '. $arr['ТоварКод'] . "<br>";
+                    echo 'Товар: '. $arr['Товар'] . "<br>";
+                    echo 'Цена: '. $arr['Цена'] . "<br>";
+                    echo 'Остаток: '. $arr['Остаток'] . "<br>";
+
+                    $goods = new Goods();
+                    $goods->category_id = $parent_id;
+                    $goods->name = $arr['Товар'];
+                    $goods->product_code = $arr['ТоварКод'];
+                    $goods->bar_code = $arr['ОсновнойШтрихКод'];
+                    $goods->price = $arr['Цена'];
+                    if (stristr($arr['Товар'], 'АКЦИЯ')) {
+                        $goods->sale = 1;
+                    } else {
+                        $goods->sale = 0;
+                    }
+                    $goods->count = $arr['Остаток'];
+                    if (!$goods->save()) {
+                        echo 'Ошибка: '; var_dump($goods);
+                    }
+
+                    echo '</div>';
+                    echo '</div>';
+                    echo "-------------------------------------------------------------------------------------------------------------------------------------------------";
+                    break;
+                }
+            }
+        }
+    }
+}
+get_child($file);*/
+
 }

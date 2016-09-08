@@ -22,6 +22,15 @@
     RewriteCond %{REQUEST_URI} ^/(cabinet)
     RewriteRule ^.*$ cabinet/web/index.php [L]
 
+    # deal with oauth second
+    RewriteCond %{REQUEST_URI} ^/(oauth)
+    RewriteRule ^oauth/assets/(.*)$ oauth/web/assets/$1 [L]
+    RewriteRule ^oauth/css/(.*)$ oauth/web/css/$1 [L]
+
+    RewriteCond %{REQUEST_URI} !^/oauth/web/(assets|css)/
+    RewriteCond %{REQUEST_URI} ^/(oauth)
+    RewriteRule ^.*$ oauth/web/index.php [L]
+
     RewriteCond %{REQUEST_URI} ^/(assets|css|js|images)
     RewriteRule ^assets/(.*)$ frontend/web/assets/$1 [L]
     RewriteRule ^css/(.*)$ frontend/web/css/$1 [L]
@@ -29,7 +38,7 @@
     RewriteRule ^images/(.*)$ frontend/web/images/$1 [L]
     RewriteRule ^(.*)$ frontend/web/$1 [L]
 
-    RewriteCond %{REQUEST_URI} !^/(frontend|backend|cabinet)/web/(assets|css|js)/
+    RewriteCond %{REQUEST_URI} !^/(frontend|backend|cabinet|oauth)/web/(assets|css|js)/
     RewriteCond %{REQUEST_URI} !index.php
     RewriteCond %{REQUEST_FILENAME} !-f [OR]
     RewriteCond %{REQUEST_FILENAME} !-d
