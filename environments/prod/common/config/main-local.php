@@ -3,9 +3,9 @@ return [
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=u0195776_card',
-            'username' => 'u0195776_card',
-            'password' => '',
+            'dsn' => 'mysql:host=localhost;dbname=card',
+            'username' => 'card.dty.su',
+            'password' => 'card.dty.su',
             'charset' => 'utf8',
         ],
         'mailer' => [
