@@ -30,7 +30,7 @@ class Excel extends \yii\db\ActiveRecord
     {
         return [
             [['card_number'], 'required'],
-            [['card_number', 'user_id'], 'integer'],
+            [['card_number', 'user_id', 'discount'], 'integer'],
             [['name', 'description'], 'string', 'max' => 255],
         ];
     }
