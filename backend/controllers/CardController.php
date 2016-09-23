@@ -106,9 +106,7 @@ class CardController extends Controller
         $filePath = Yii::getAlias('@frontend') . '/web/img/' . $newFileName;
         if( $file->saveAs($filePath) ){
             return 'http://card.dty.su/img/'.$newFileName;
-        }else return false;
-        
-        
+        }else return false;    
     }
 
     /**
