@@ -165,7 +165,6 @@ class SiteController extends Controller
     public function actionPrivacy()
     {
         $this->layout = "empty";
-        
         return $this->render('privacy');
     }
 
