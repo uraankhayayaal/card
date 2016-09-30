@@ -48,8 +48,8 @@ $this->title = 'My Yii Application';
         <?php yii\widgets\Pjax::end() ?>
     </div>
 
-    <?php/* yii\widgets\Pjax::begin(['id' => 'companies']) ?>        
-        <?= GridView::widget([
+    <?php/* yii\widgets\Pjax::begin(['id' => 'companies']) */?>        
+        <?/*= GridView::widget([
             'dataProvider' => $dataProvider,
             'filterModel' => $searchModel,
             'summary' => false,
@@ -112,6 +112,6 @@ $this->title = 'My Yii Application';
                    'template' => '{update} {delete}'
                 ]
             ],
-        ]); ?>
-    <?php yii\widgets\Pjax::end() */?>
+        ]); */?>
+    <?php/* yii\widgets\Pjax::end() */?>
 </div>
