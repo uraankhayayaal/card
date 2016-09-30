@@ -42,6 +42,7 @@ class LoginForm extends Model
             'id' => 'ID',
             'email' => 'E-mail',
             'password' => 'Пароль',
+            'rememberMe' => 'Запомнить меня',
         ];
     }
 

@@ -11,7 +11,7 @@ return [
             'locale' => 'ru-RU',
         ],
     ],
-    'language' => 'ru-RU',
+    //'language' => 'ru-RU',
     'sourceLanguage'=>'en_US',
     'charset'=>'utf-8',
 ];

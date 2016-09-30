@@ -108,15 +108,19 @@ class ExcelController extends Controller
                 $file = iconv('cp1251','utf-8',$file);
                 $file = Json::decode($file);
 
+                $newCount = 0;
+
                 foreach ($file as $key => $value) {
-                    if (!Excel::findOne(['card_number' => $value['НомерКарты']])) {
+                    if (!Excel::findOne(['card_number' => $value['card_number']])) {
                         $model = new Excel();
-                        $model->card_number = $value['НомерКарты'];
-                        $model->name = $value['ФИОВладельца'];
-                        $model->discount = $value['ПроцентСкидки'];
+                        $model->card_number = $value['card_number'];
+                        $model->name = $value['name'];
+                        $model->discount = $value['discount'];
                         $model->save();
+                        $newCount++;
                     }
                 }
+                echo $newCount;
             }
         } else {
             return $this->render('import', [

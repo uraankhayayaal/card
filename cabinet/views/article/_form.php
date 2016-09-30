@@ -32,6 +32,8 @@ use common\models\Card;
 
     <?= $form->field($model, 'card_id')->dropDownList(ArrayHelper::map(Card::find()->where(['in', 'id', $cards])->all(),'id','name'),['prompt' => 'Выберите компанию...']) ?>
 
+    <?= $form->field($model, 'is_push')->checkbox() ?>
+
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Создать' : 'Изменить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

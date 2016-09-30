@@ -69,6 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'value' => 'card.name'
                 ],
                 'created_at',
+                'is_push',
 
                 ['class' => 'yii\grid\ActionColumn'],
             ],

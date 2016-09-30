@@ -30,7 +30,7 @@ AppAsset::register($this);
     if (!Yii::$app->user->isGuest) {
 
         NavBar::begin([
-            'brandLabel' => 'My Company',
+            'brandLabel' => 'Кабинет',
             'brandUrl' => Yii::$app->homeUrl,
             'options' => [
                 'class' => 'navbar-inverse navbar-fixed-top',
@@ -40,7 +40,7 @@ AppAsset::register($this);
             
         ];
         
-        $menuItems[] = ['label' => 'Мои магазины', 'url' => ['/site/index']];
+        $menuItems[] = ['label' => 'Мои предприятия', 'url' => ['/site/index']];
         $menuItems[] = ['label' => 'Новости', 'url' => ['/article/index']];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')

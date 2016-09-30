@@ -19,6 +19,7 @@ use Yii;
  */
 class Notification extends \yii\db\ActiveRecord
 {
+    public $user_id_for_push;
     /**
      * @inheritdoc
      */
@@ -35,8 +36,8 @@ class Notification extends \yii\db\ActiveRecord
         return [
             [['title'], 'required'],
             [['description'], 'string'],
-            [['card_id', 'status'], 'integer'],
-            [['title'], 'string', 'max' => 255],
+            [['card_id', 'status', 'is_push'], 'integer'],
+            [['title', 'user_id_for_push'], 'string', 'max' => 255],
             //[['card_id'], 'exist', 'skipOnError' => true, 'targetClass' => Card::className(), 'targetAttribute' => ['card_id' => 'id']],
             [['created_at', 'updated_at'], 'safe'],
         ];
@@ -52,6 +53,8 @@ class Notification extends \yii\db\ActiveRecord
             'title' => 'Title',
             'description' => 'Description',
             'card_id' => 'Card ID',
+            'is_push' => 'Push Notification',
+            'user_id_for_push' => 'User ID For Push',
         ];
     }
 

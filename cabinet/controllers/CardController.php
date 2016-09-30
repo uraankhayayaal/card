@@ -114,7 +114,7 @@ class CardController extends Controller
         $newFileName = date("YmdHis").str_ireplace($rus, $lat, $file->name);
         $filePath = Yii::getAlias('@frontend') . '/web/img/' . $newFileName;
         if( $file->saveAs($filePath) ){
-            return 'http://card.dty.su/img/'.$newFileName;
+            return Yii::getAlias('@frontend-web') . '/img/'.$newFileName;
         }else return false;
         
         

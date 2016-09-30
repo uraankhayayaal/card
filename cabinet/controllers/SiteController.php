@@ -5,10 +5,12 @@ use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\data\ActiveDataProvider;
 use common\models\LoginForm;
 use common\models\PasswordResetRequestForm;
 use common\models\ResetPasswordForm;
 use common\models\SignupForm;
+use cabinet\models\Company;
 
 /**
  * Site controller
@@ -62,6 +64,17 @@ class SiteController extends Controller
         $model = new \cabinet\models\Company();
         $searchModel = new \cabinet\models\CompanySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        /*$query = Company::find()->where(['user_id' => Yii::$app->user->identity->id])->with('cards')->asArray();
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => false,
+            'pagination' => [
+                'pageSize' => $limit,
+                'page' => $page,
+            ],
+        ]);*/
 
         if ($model->load(Yii::$app->request->post()) && $model->validate())
         {
