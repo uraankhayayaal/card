@@ -70,9 +70,10 @@ class UsercardController extends ActiveController
 
     public function actionDelete($id)
     {
-        if ($a = Usercard::find()->where(['user_id' => Yii::$app->user->identity->id, 'id' => $id])->one()) {
-            $this->findModel($id)->delete();
-            return true;
+        if (Usercard::find()->where(['user_id' => Yii::$app->user->identity->id, 'id' => $id])->one()) {
+            if ($this->findModel($id)->delete()) {
+                return true;
+            }
         } else {
             return false;
         }
