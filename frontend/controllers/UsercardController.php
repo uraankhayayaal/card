@@ -38,13 +38,15 @@ class UsercardController extends ActiveController
         return $actions;
     }
 
-    public function actionIndex(){  
+    public function actionIndex()
+    {  
         $model = Usercard::find()->where(['user_id' => \Yii::$app->user->identity->id])->all();
 		\Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         return $model;
     }
 
-    public function actionCreate(){  
+    public function actionCreate()
+    {  
         $model = new Usercard();
         if ($model->load(Yii::$app->getRequest()->getBodyParams(),'') && $model->save()) {
             \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
@@ -72,9 +74,9 @@ class UsercardController extends ActiveController
     {
         if (Usercard::find()->where(['user_id' => Yii::$app->user->identity->id, 'id' => $id])->one()) {
             $this->findModel($id)->delete();
-            return true;
+            Yii::$app->getResponse()->setStatusCode(204);
         } else {
-            return false;
+            throw new ServerErrorHttpException('Failed to delete the object for unknown reason.');
         }
     }
     
