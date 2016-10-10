@@ -23,6 +23,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= $form->field($model, 'password')->passwordInput() ?>
 
+                <?= $form->field($model, 'checkPassword')->passwordInput() ?>
+
+                <p><?= Html::a('Забыли пароль?', '#'); ?></p>
+
                 <div class="row">
                     <div class="form-group col-lg-9">
                         <?= Html::submitButton('Зарегистрироваться', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>

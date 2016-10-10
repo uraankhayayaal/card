@@ -17,8 +17,9 @@
     RewriteCond %{REQUEST_URI} ^/(cabinet)
     RewriteRule ^cabinet/assets/(.*)$ cabinet/web/assets/$1 [L]
     RewriteRule ^cabinet/css/(.*)$ cabinet/web/css/$1 [L]
+    RewriteRule ^cabinet/js/(.*)$ cabinet/web/js/$1 [L]
 
-    RewriteCond %{REQUEST_URI} !^/cabinet/web/(assets|css)/
+    RewriteCond %{REQUEST_URI} !^/cabinet/web/(assets|css|js)/
     RewriteCond %{REQUEST_URI} ^/(cabinet)
     RewriteRule ^.*$ cabinet/web/index.php [L]
 
@@ -43,4 +44,4 @@
     RewriteCond %{REQUEST_FILENAME} !-f [OR]
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^.*$ frontend/web/index.php
-</IfModule> 
+</IfModule>

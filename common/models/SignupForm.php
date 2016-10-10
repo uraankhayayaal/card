@@ -12,6 +12,7 @@ class SignupForm extends Model
     //public $username;
     public $email;
     public $password;
+    public $checkPassword;
 
 
     /**
@@ -31,8 +32,8 @@ class SignupForm extends Model
             ['email', 'string', 'max' => 255],
             ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
 
-            ['password', 'required'],
-            ['password', 'string', 'min' => 6],
+            [['password', 'checkPassword'], 'required'],
+            [['password', 'checkPassword'], 'string', 'min' => 6],
         ];
     }
     
@@ -42,6 +43,7 @@ class SignupForm extends Model
             'id' => 'ID',
             'email' => 'E-mail',
             'password' => 'Пароль',
+            'checkPassword' => 'Повторите пароль',
         ];
     }
 
@@ -56,12 +58,25 @@ class SignupForm extends Model
             return null;
         }
         
+        if ($this->password != $this->checkPassword) {
+            return null;
+        }
+
         $user = new User();
         //$user->username = $this->username;
         $user->email = $this->email;
         $user->setPassword($this->password);
         $user->generateAuthKey();
         $user->generateToken();
+        $user->generatePasswordResetToken();
+    
+        \Yii::$app->mailer->compose()
+            ->setFrom('admin@dty.su')
+            ->setTo($this->email)
+            ->setSubject('Регистрация на сайте Card.dty.su')
+            ->setTextBody('Перейдите по ссылке для подтверждения почтового адреса')
+            ->setHtmlBody('<b>Перейдите по ссылке для подтверждения почтового адреса: https://card.dty.su/cabinet/confirm-email?email='.$this->email.'&token='.$user->password_reset_token.'</b>')
+            ->send();
         
         return $user->save() ? $user : null;
     }

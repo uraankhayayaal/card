@@ -12,6 +12,7 @@ return [
     'controllerNamespace' => 'cabinet\controllers',
     'bootstrap' => ['log'],
     'modules' => [],
+    'language' => 'ru-RU',
     'components' => [
         'user' => [
             'identityClass' => 'common\models\User',
@@ -65,7 +66,19 @@ return [
             // custom name for the component, by default we will use 'gcm' and 'apns'
             //'gcm' => 'gcm',
             //'apns' => 'apns',
-        ]
+        ],
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            'useFileTransport' => false,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.yandex.ru',
+                'username' => 'admin@dty.su',
+                'password' => 'golem130',
+                'port' => '465',
+                'encryption' => 'ssl',
+            ],
+        ],
     ],
     'params' => $params,
 ];

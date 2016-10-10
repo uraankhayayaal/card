@@ -47,8 +47,8 @@ class Card extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'path' => 'Img Src',
+            'name' => 'Название',
+            'path' => 'Изображение',
             'company_id' => 'Company ID',
             'type' => 'Type',
         ];

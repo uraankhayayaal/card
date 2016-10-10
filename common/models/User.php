@@ -24,6 +24,8 @@ use yii\web\IdentityInterface;
 class User extends ActiveRecord implements IdentityInterface
 {
     const STATUS_DELETED = 0;
+    const STATUS_NOT_CONFIRM_EMAIL = 8;
+    const STATUS_NOT_CONFIRM_ADMIN = 9;
     const STATUS_ACTIVE = 10;
 
 
@@ -51,8 +53,8 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            ['status', 'default', 'value' => self::STATUS_ACTIVE],
-            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+            ['status', 'default', 'value' => self::STATUS_NOT_CONFIRM_EMAIL],
+            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_NOT_CONFIRM_ADMIN, self::STATUS_NOT_CONFIRM_EMAIL, self::STATUS_DELETED]],
         ];
     }
 
@@ -128,6 +130,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return $this->getPrimaryKey();
     }
+    
     public function getGtoken()
     {
         if ($this->hasOne(Gtoken::className(), ['user_id' => 'id'])->One()->value != null)

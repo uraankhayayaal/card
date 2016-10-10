@@ -3,7 +3,7 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use backend\assets\AppAsset;
+use cabinet\assets\AppAsset;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
@@ -46,7 +46,10 @@ AppAsset::register($this);
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
                 'Выйти (' . Yii::$app->user->identity->email . ')',
-                ['class' => 'btn btn-link']
+                [
+                    'class' => 'btn btn-link',
+                    'style' => 'margin-top: 6px;'
+                ]
             )
             . Html::endForm()
             . '</li>';
