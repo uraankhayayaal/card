@@ -29,7 +29,7 @@ class UserController extends Controller
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
-                            return User::isUserAdmin(Yii::$app->user->identity->username);
+                            return User::isUserAdmin(Yii::$app->user->identity->email);
                         }
                     ],
                 ],
