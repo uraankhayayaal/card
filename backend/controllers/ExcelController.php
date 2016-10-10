@@ -10,6 +10,7 @@ use common\models\Excel;
 use common\models\UploadForm;
 use yii\db\QueryBuilder;
 use yii\helpers\Json;
+use common\models\User;
 
 /**
  * Site controller
@@ -26,13 +27,12 @@ class ExcelController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'signup', 'requestPasswordReset', 'resetPassword', 'error'],
-                        'allow' => true,
-                    ],
-                    [
                         'actions' => ['index', 'import'],
                         'allow' => true,
                         'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return User::isUserAdmin(Yii::$app->user->identity->username);
+                        }
                     ],
                 ],
             ],

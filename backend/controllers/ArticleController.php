@@ -11,6 +11,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use common\models\Gtoken;
+use common\models\User;
 
 /**
  * ArticleController implements the CRUD actions for Notification model.
@@ -27,13 +28,12 @@ class ArticleController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'signup', 'requestPasswordReset', 'resetPassword', 'error'],
-                        'allow' => true,
-                    ],
-                    [
-                        'actions' => ['index', 'view', 'create', 'push', 'update', 'delete'],
+                        'actions' => ['index', 'view', 'create', 'update', 'dalete', 'push'],
                         'allow' => true,
                         'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return User::isUserAdmin(Yii::$app->user->identity->username);
+                        }
                     ],
                 ],
             ],

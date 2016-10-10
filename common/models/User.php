@@ -28,6 +28,9 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_NOT_CONFIRM_ADMIN = 9;
     const STATUS_ACTIVE = 10;
 
+    const ROLE_USER = 5;
+    const ROLE_MANAGER = 10;
+    const ROLE_ADMIN = 15;
 
     /**
      * @inheritdoc
@@ -55,6 +58,8 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['status', 'default', 'value' => self::STATUS_NOT_CONFIRM_EMAIL],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_NOT_CONFIRM_ADMIN, self::STATUS_NOT_CONFIRM_EMAIL, self::STATUS_DELETED]],
+            ['group', 'default', 'value' => self::ROLE_USER],
+            ['group', 'in', 'range' => [self::ROLE_USER, self::ROLE_MANAGER, self::ROLE_ADMIN]],
         ];
     }
 
@@ -212,5 +217,15 @@ class User extends ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+
+    public static function isUserAdmin($email)
+    {
+        if (static::findOne(['email' => $email, 'group' => self::ROLE_ADMIN]))
+        {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
