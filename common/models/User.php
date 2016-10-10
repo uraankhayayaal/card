@@ -133,7 +133,7 @@ class User extends ActiveRecord implements IdentityInterface
     
     public function getGtoken()
     {
-        if ($this->hasOne(Gtoken::className(), ['user_id' => 'id'])->One()->value != null)
+        if ($this->hasOne(Gtoken::className(), ['user_id' => 'id'])->One())
         return 'Активен';
         else 
             return '';
