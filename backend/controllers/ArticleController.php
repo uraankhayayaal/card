@@ -28,7 +28,7 @@ class ArticleController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index', 'view', 'create', 'update', 'dalete', 'push'],
+                        'actions' => ['index', 'view', 'create', 'update', 'delete', 'push'],
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {

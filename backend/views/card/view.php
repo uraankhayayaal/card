@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\grid\GridView;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Card */
@@ -28,11 +30,43 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'name',
             'path',
-            'company_id',
+            [
+                'label' => 'Адресс',
+                'value'  => call_user_func(function ($data) {
+                    foreach ($data->addresses as $key => $address) {
+                        $render .= $address->value . "<br/>";
+                    }
+                    return $render;
+                }, $model),
+                'format' => 'raw',
+            ],
+            'company.name',
         ],
     ]) ?>
+
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        //'filterModel' => $searchModel,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+
+            //'id',
+            'user.email',
+            [
+                'class' => 'yii\grid\DataColumn', // can be omitted, as it is the default
+                'label'=>'Карты',
+                'format' => 'raw',
+                'value' => function ($data) {                  
+                    return Html::a($data->barCode, Url::to(['usercard/view', 'id'=>$data->id]));
+                },
+                'options' => [
+                    'multiple' => true,
+                ],
+            ],
+            'number',
+            //'company_id',
+        ],
+    ]); ?>
 
 </div>

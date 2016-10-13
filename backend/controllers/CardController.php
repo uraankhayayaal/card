@@ -67,7 +67,16 @@ class CardController extends Controller
      */
     public function actionView($id)
     {
+        $query = \common\models\Usercard::find()->where(['card_id' => $id]);
+        $dataProvider = new \yii\data\ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 60,
+            ],
+        ]);
+        
         return $this->render('view', [
+            'dataProvider' => $dataProvider,
             'model' => $this->findModel($id),
         ]);
     }
