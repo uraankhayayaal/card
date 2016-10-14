@@ -34,6 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'label' => 'Адресс',
                 'value'  => call_user_func(function ($data) {
+		    $render = '';
                     foreach ($data->addresses as $key => $address) {
                         $render .= $address->value . "<br/>";
                     }
