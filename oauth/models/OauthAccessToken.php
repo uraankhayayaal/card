@@ -48,4 +48,9 @@ class OauthAccessToken extends \yii\db\ActiveRecord
             'refresh_token' => 'Refresh Token',
         ];
     }
+
+    public function generateAccessToken()
+    {
+        $this->access_token = Yii::$app->security->generateRandomString();
+    }
 }

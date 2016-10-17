@@ -12,7 +12,7 @@ $this->title = 'O.Auth 2.0';
     <div class="row">
         <div class="col-lg-5">
             <p>
-                <?= Html::a('Выйти (' . Yii::$app->user->identity->email . ')', ['logout', 'client_id' => $client_id, 'redirect_uri' => $redirect_uri], [
+                <?= Html::a('Выйти (' . Yii::$app->user->identity->email . ')', ['logout', 'client_id' => $client_id, 'redirect_uri' => $redirect_uri, 'id' => $id], [
                     'data' => [
                         'method' => 'post',
                         //'confirm' => 'Are you sure?',
@@ -21,16 +21,16 @@ $this->title = 'O.Auth 2.0';
                 ]) ?>
             </p>
             <p>
-                <?= Html::a('Разрешить', ['access', 'client_id' => $client_id, 'redirect_uri' => $redirect_uri], [
+                <?= Html::a('Разрешить', ['access', 'client_id' => $client_id, 'redirect_uri' => $redirect_uri, 'id' => $id], [
                     'data' => [
                         'method' => 'post',
-                        'params' => ['access'=> 1],
+                        'params' => ['access'=> 200],
                     ],
                 ]) ?>
-                <?= Html::a('Отмена', ['access', 'client_id' => $client_id, 'redirect_uri' => $redirect_uri], [
+                <?= Html::a('Отмена', ['access', 'client_id' => $client_id, 'redirect_uri' => $redirect_uri, 'id' => $id], [
                     'data' => [
                         'method' => 'post',
-                        'params' => ['access'=> 0],
+                        'params' => ['access'=> 403],
                     ],
                 ]) ?>
             </p>

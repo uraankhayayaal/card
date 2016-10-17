@@ -49,6 +49,7 @@ return [
                 '' => 'oauth/authorize',
                 'access' => 'oauth/access',
                 'logout' => 'oauth/logout',
+                'gat' => 'oauth/generate-access-token',
             ],
         ],
     ],
