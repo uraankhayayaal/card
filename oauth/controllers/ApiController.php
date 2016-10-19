@@ -3,7 +3,10 @@ namespace oauth\controllers;
 
 use Yii;
 use yii\web\Controller;
-
+use yii\helpers\Json;
+use oauth\models\OauthAccessToken;
+use common\models\Usercard;
+use common\models\Excel;
 class ApiController extends Controller
 {
     public function actions()
@@ -18,21 +21,14 @@ class ApiController extends Controller
     public function actionDiscount()
     {
     	if ($post = Yii::$app->request->post()) {
-    		$this->log("Api");
-    		exit();
+    		if (OauthAccessToken::find()->where(['user_id' => $post['id'], 'access_token' => $post['access_token']])->one()) {
+    			if ($model = Usercard::find()->where(['user_id' => $post['id'], 'card_id' => 19])->one()) {
+    				if ($card = Excel::find()->where(['card_number' => $model->barCode])->one()) {
+    					return $card->discount;
+    				}
+    			}
+    		}
     	}
-		$this->log("No");
-		exit();
-    }
-
-    private function log($message)
-    {
-        $file = Yii::getAlias('@oauth').'/web/log/oauth.log';
-        if (!file_exists($file)) {
-            fopen($file, 'w+');
-        }
-        date_default_timezone_set('Asia/Yakutsk');
-        file_put_contents($file, "Date: ".date("Y-m-d H:i:s")." | ".$message."\n", FILE_APPEND | LOCK_EX);
-        return true;
+    	return false;
     }
 }
