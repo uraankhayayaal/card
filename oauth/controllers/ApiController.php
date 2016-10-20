@@ -31,4 +31,16 @@ class ApiController extends Controller
     	}
     	return 0;
     }
+
+    public function actionDelete()
+    {
+        if ($post = Yii::$app->request->post()) {
+            if ($model = OauthAccessToken::find()->where(['user_id' => $post['id'], 'access_token' => $post['access_token']])->one()) {
+                if ($model->delete()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
