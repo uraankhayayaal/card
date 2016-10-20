@@ -52,7 +52,7 @@ class OauthController extends Controller
 
     public function actionAccess($client_id, $redirect_uri, $id)
     {
-	$this->log("Access");
+	   $this->log("Access");
         if (OauthClient::findOne(['client_id' => $client_id])) {
 		$this->log("Access - One if");
             if ($model = OauthAccessToken::find()->where(['client_id' => $client_id, 'user_id' => Yii::$app->user->identity->id])->one()) {
