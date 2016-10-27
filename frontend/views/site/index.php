@@ -34,7 +34,7 @@ $this->title = 'DTY Card Картмоне - дисконтные карты в �
                         <div class="clear"></div>
                         <div class="links">
                             <a target="_blank" href="https://play.google.com/store/apps/details?id=ru.admin14.dtycard" class="btn gstore"></a>
-                            <a href="#" class="btn istore"></a>
+                            <a target="_blank" href="https://itunes.apple.com/ru/app/kartmone-diskontnye-karty/id1131181295" class="btn istore"></a>
                             <div class="clear"></div>
                         </div>
                         <div class="clear"></div>
@@ -86,7 +86,7 @@ $this->title = 'DTY Card Картмоне - дисконтные карты в �
                         <span class="line_decor">Будьте в курсе всех акций ваших любимых магазинов</span>
                         <div class="clear"></div>
                         <a target="_blank" href="https://play.google.com/store/apps/details?id=ru.admin14.dtycard" class="btn gstore"></a>
-                        <a href="#" class="btn istore"></a>
+                        <a target="_blank" href="https://itunes.apple.com/ru/app/kartmone-diskontnye-karty/id1131181295" class="btn istore"></a>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 phone_stack">
                         <img src="/images/andapp.png" class="img-responsive andapp_img" alt="Картмоне">
