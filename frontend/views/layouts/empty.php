@@ -36,7 +36,7 @@ AppAsset::register($this);
         <?= $content ?>
 
 <?php $this->endBody() ?>
-<!-- Yandex.Metrika counter -->
+<!-- Yandex.Metrika counter
 <script type="text/javascript">
     (function (d, w, c) {
         (w[c] = w[c] || []).push(function() {
