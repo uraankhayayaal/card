@@ -4,6 +4,7 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use common\models\Card;
+use common\models\User;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Notification */
@@ -31,6 +32,10 @@ use common\models\Card;
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'card_id')->dropDownList(ArrayHelper::map(Card::find()->all(),'id','name'),['prompt' => 'Выберите компанию...']) ?>
+
+    <?php if ($model->isNewRecord) {
+        echo $form->field($model, 'user_id_for_push')->dropDownList(ArrayHelper::map(User::find()->all(),'id','email'),['prompt' => 'Выберите пользователя...']);
+    } ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Создать' : 'Изменить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

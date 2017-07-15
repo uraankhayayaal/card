@@ -126,7 +126,7 @@ $this->title = 'DTY Card Картмоне - разрешение на обраб
             </li>
             <li class="pull-right">
                 По всем другим вопросам обращаться: <a href="mailto:info@dty.su" target="_top">info@dty.su</a><br/>
-                Card DTY Картмоне, <a target="_blank" href="http://dty.su">&copy; Цифровые технологии Якутии, <?= date(Y) ?></a>
+                Card DTY Картмоне, <a target="_blank" href="http://dty.su">&copy; Цифровые технологии Якутии, <?= date('Y') ?></a>
             </li>
             <div class="clear"></div>
         </ul>

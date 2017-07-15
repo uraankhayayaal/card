@@ -2,8 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\helpers\ArrayHelper;
-use common\models\Company;
 use kartik\file\FileInput;
 
 /* @var $this yii\web\View */
@@ -12,17 +10,25 @@ use kartik\file\FileInput;
 ?>
 
 <div class="card-form">
+<?php $this->registerJs(
+   '$("document").ready(function() { 
+        $("#new_card").on("pjax:end", function() {
+            $.pjax.reload({container:"#companies"});  //Reload GridView
+            $(".modal").modal("hide");
+        });
+    });'
+);
+?>
 
+<?php yii\widgets\Pjax::begin(['id' => 'new_card']) ?>
     <?php $form = ActiveForm::begin([
-    	'options' => [
-            'enctype'=>'multipart/form-data',
-        ],
+    	'options' => ['data-pjax' => true],
     ]); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'path')->widget(FileInput::classname(), [
-        'options' => ['accept' => 'image/*',],
+        'options' => ['accept' => 'image/*'],
     ]) ?>
 
     <div class="form-group">
@@ -30,5 +36,6 @@ use kartik\file\FileInput;
     </div>
 
     <?php ActiveForm::end(); ?>
+<?php yii\widgets\Pjax::end() ?>
 
 </div>

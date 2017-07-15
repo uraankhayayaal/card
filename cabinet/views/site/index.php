@@ -4,15 +4,17 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
 use yii\bootstrap\Modal;
+use yii\widgets\ListView;
+use kartik\file\FileInput;
 
 /* @var $this yii\web\View */
 
 $this->title = 'My Yii Application';
 ?>
 <div class="site-index">
-    <h1>Мои магазины</h1>
+    <h1>Мои предприятия</h1>
 	<div class="form-group">
-        <?= Html::button(Yii::t('app', 'Добавить магазин'), [
+        <?= Html::button(Yii::t('app', 'Добавить предприятие'), [
             // other options
             'class' => 'btn btn-success',
             'data' => [
@@ -22,76 +24,63 @@ $this->title = 'My Yii Application';
         ]) ?>
         <?php Modal::begin([
             'id' => 'AddCompany',
-            'header' => '<b>' . Yii::t('app', 'Новая компания') . '</b>',
+            'header' => '<b>' . Yii::t('app', 'Новое предприятие') . '</b>',
             //'footer' => Html::submitButton(Yii::t('app', 'Save')), // Subscribe checkbox
         ]);
             echo $this->render('_form', ['model' => $model]);
         Modal::end();?>
     </div>
 
-    <?php yii\widgets\Pjax::begin(['id' => 'companies']) ?>
-        <?= GridView::widget([
-            'dataProvider' => $dataProvider,
-            'filterModel' => $searchModel,
-            'columns' => [
-                ['class' => 'yii\grid\SerialColumn'],
-
-                //'id',
-                //'name',
-                //'content:ntext',
-                [
-                    'class' => 'yii\grid\DataColumn', // can be omitted, as it is the default
-                    'label'=>'Компании',
-                    'format' => 'raw',
-                    'value' => function ($data) {
-                        $result = "";
-                            $result = $result. '<h3>'. $data->name.'</h3><br />';
-                            $result = $result. $data->content;                 
-                        return $result;
-                    },
-                    'options' => [
-                        'multiple' => true,
-                    ],
-                    'contentOptions'=>['style'=>'max-width: 300px;'],
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <?php yii\widgets\Pjax::begin(['id' => 'companies']) ?> 
+            <?= ListView::widget([
+                'dataProvider' => $dataProvider,
+                'itemView' => '_list',
+                'summary' => false,
+                'options' => [
+                    'tag' => 'div',
+                    'class' => 'row'
                 ],
-                [
-                    'class' => 'yii\grid\DataColumn', // can be omitted, as it is the default
-                    'label'=>'Карты',
-                    'format' => 'raw',
-                    'value' => function ($data) {
-                        $result = "";
-                        foreach ($data->cards as $card) {
-                            $result = $result. Html::a(Html::img($card->path, ['width'=>'120px']), Url::to(['card/view', 'id' => $card->id])).'<br />';
-                            $result = $result. Html::a($card->name, Url::to(['card/view', 'id' => $card->id])).'<br />';
-                        }                     
-                        return $result.Html::a("", Url::to(['card/create', 'company_id'=>$data->id]), ['class' => 'glyphicon glyphicon-plus btn btn-success', 'title' => 'Добавить карту']);
-                    },
-                    'options' => [
-                        'multiple' => true,
-                    ],
+                'itemOptions' => [
+                    'tag' => 'div',
+                    'class' => 'col-lg-12'
                 ],
-
-                [
-                    'class' => 'yii\grid\DataColumn', // can be omitted, as it is the default
-                    'label'=>'Адреса',
-                    'format' => 'raw',
-                    'value' => function ($data) {
-                        $result = "";
-                        foreach ($data->addresses as $adrress) {
-                            $result = $result. Html::a($adrress->value, Url::to(['address/view', 'id' => $adrress->id])).'<br />';
-                        }                     
-                        return $result.Html::a("", Url::to(['address/create', 'company_id'=>$data->id]), ['class' => 'glyphicon glyphicon-plus btn btn-success', 'title' => 'Добавить адрес']);
-                    },
-                    'options' => [
-                        'multiple' => true,
-                    ],
-                ],
-
-                [
-                   'class' => 'yii\grid\ActionColumn',
-                   'template' => '{update} {delete}'
-                ]
-            ],
-        ]); ?>
-    <?php yii\widgets\Pjax::end() ?>
+            ]); ?>
+        <?php yii\widgets\Pjax::end() ?>
+    </div>
 </div>
+
+<?php Modal::begin([
+    'id' => 'AddCard',
+    'header' => '<b>' . Yii::t('app', 'Новая карта') . '</b>',
+]); ?>
+    <form action="card/create/" method="post" id="card_create" enctype="multipart/form-data">
+        <p><label for="name" class="control-label">Название</label>
+        <input type="text" name="Card[name]" id="name" class="form-control"></p>
+        <p><label for="path">Изображение</label>
+        <input type="file" name="Card[path]" id="path"></p>
+        <input type="hidden" name="Card[company_id]" id="company_id">
+        <input type="submit" id="submit" value="Отправить" class="btn btn-success">
+    </form>
+<?php Modal::end(); ?>
+
+<?php Modal::begin([
+    'id' => 'Address',
+    'header' => '<b>' . Yii::t('app', 'Список адресов') . '</b>',
+]); ?>
+    <div id="address"></div>
+    <div style="background-color: white; height: 35px;"><button class="btn btn-success pull-right" id="btn-add-address" data-add_address="">Добавить</button></div>
+<?php Modal::end(); ?>
+
+
+<?php Modal::begin([
+    'id' => 'AddAddress',
+    'header' => '<b>' . Yii::t('app', 'Добавить адрес') . '</b>',
+]); ?>
+    <form action="address/create/" method="post" id="address_create" enctype="multipart/form-data">
+        <p><label for="value" class="control-label">Адрес</label>
+        <input type="text" name="Address[value]" id="address-value" class="form-control"></p>
+        <input type="hidden" name="Address[company_id]" id="address-company_id">
+        <input type="submit" id="submit" value="Отправить" class="btn btn-success">
+    </form>
+<?php Modal::end(); ?>

@@ -9,6 +9,7 @@ use common\models\LoginForm;
 use common\models\PasswordResetRequestForm;
 use common\models\ResetPasswordForm;
 use common\models\SignupForm;
+use common\models\User;
 
 /**
  * Site controller
@@ -32,6 +33,9 @@ class SiteController extends Controller
                         'actions' => ['logout', 'index'],
                         'allow' => true,
                         'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return User::isUserAdmin(Yii::$app->user->identity->email);
+                        }
                     ],
                 ],
             ],
@@ -63,16 +67,16 @@ class SiteController extends Controller
 
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
+        if (!\Yii::$app->user->isGuest) {
+           return $this->goHome();
         }
-
+     
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+        if ($model->load(Yii::$app->request->post()) && $model->loginAdmin()) {
+           return $this->goBack();
         } else {
             return $this->render('login', [
-                'model' => $model,
+               'model' => $model,
             ]);
         }
     }

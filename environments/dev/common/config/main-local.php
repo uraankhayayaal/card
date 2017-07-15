@@ -3,7 +3,7 @@ return [
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=card.dty.su',
+            'dsn' => 'mysql:host=localhost;dbname=card',
             'username' => 'card.dty.su',
             'password' => 'card.dty.su',
             'charset' => 'utf8',

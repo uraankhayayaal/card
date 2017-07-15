@@ -8,6 +8,7 @@ use common\models\AddressSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Json;
 
 /**
  * AddressController implements the CRUD actions for Address model.
@@ -67,7 +68,8 @@ class AddressController extends Controller
         if ($company_id != null) $model->company_id = $company_id;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            //return $this->redirect(['view', 'id' => $model->id]);
+            return Json::encode(['status_code' => 200]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -105,6 +107,11 @@ class AddressController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['/']);
+    }
+
+    public function actionList()
+    {
+        return Json::encode(Address::find()->where(['company_id' => Yii::$app->request->post()['company_id']])->all());
     }
 
     /**

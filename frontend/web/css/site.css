@@ -331,3 +331,74 @@ header .nav ul > li > a:hover{
 .footer.footer-copyright .bg{
     background-color: #ff4d4d;
 }
+
+
+
+
+footer.page-footer{
+    margin-top: 0;
+}
+.soc_settt{
+    display: block;
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+@media screen and (max-width: 700px) {
+    .soc_settt{
+        width: 40px;
+        height: 40px;
+    }
+}
+@media screen and (max-width: 600px) {
+    .soc_settt{
+        width: 30px;
+        height: 30px;
+    }
+}
+@media screen and (max-width: 400px) {
+    .soc_settt{
+        width: 25px;
+        height: 25px;
+    }
+}
+.btn-floating.vk,
+.soc_settt.vk{
+    background-image:url(../img/vk.png);
+}
+.btn-floating.fben,
+.soc_settt.fben{
+    background-image:url(../img/fben.png);
+}
+.btn-floating.ytor,
+.soc_settt.ytor{
+    background-image:url(../img/ytor.png);
+}
+.btn-floating.twin,
+.soc_settt.twin{
+    background-image:url(../img/twin.png);
+}
+.page-footer ul{
+    list-style: none;
+}
+.page-footer ul > li {
+    display: inline-block;
+}
+.page-footer .row{
+    margin-bottom:0;
+}
+.btn-floating{
+    border-radius: 0;
+    background-color: transparent;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    box-shadow: none;
+}
+.btn-floating:hover{
+    background-color: transparent;
+    box-shadow: none;
+}

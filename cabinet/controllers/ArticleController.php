@@ -51,12 +51,27 @@ class ArticleController extends Controller
      */
     public function actionIndex()
     {
-        $model = new Notification();
-        $searchModel = new NotificationSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+      $model = new Notification();
+      $searchModel = new NotificationSearch();
+      $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+      if ($model->load(Yii::$app->request->post()) && $model->save())
+      {
+        $model->is_push = $model->is_push * 1;
+        if ($model->is_push == 1) {
+          $last = Notification::find()->where(['is_push' => 1])->orderBy(['created_at' => SORT_DESC])->one();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save())
-        {
+          $date_from = strtotime($last->created_at);
+          $date_from = date("Y-m-d", $date_from);
+          $date_till = date("Y-m-d");
+
+          $date_from = explode('-', $date_from);
+          $date_till = explode('-', $date_till);
+   
+          $time_from = mktime(0, 0, 0, $date_from[1], $date_from[2], $date_from[0]);
+          $time_till = mktime(0, 0, 0, $date_till[1], $date_till[2], $date_till[0]);
+          
+          $diff = ($time_till - $time_from)/60/60/24;
+          if ($diff > 5) {
             $noty = $model;
             $model = new Notification(); //reset model
 
@@ -66,7 +81,7 @@ class ArticleController extends Controller
               $users[] = $usercard->user_id; 
             }
             
-            /*$gcm = Yii::$app->gcm;
+            $gcm = Yii::$app->gcm;
             $push_tokens = ArrayHelper::getColumn(\common\models\Gtoken::find()->joinWith('user')->where(['os' => 2])->andWhere(['not', ['user_id' => null]])->andWhere(['in', 'user.id', array_unique($users)])->all(), 'value');
             $message = \yii\helpers\BaseJson::encode(['id' => $noty->id, 'title' => $noty->title, 'body' => $noty->description, 'company_card_id' => $noty->card_id]);
             $result= $gcm->sendMulti($push_tokens, $message,
@@ -89,16 +104,17 @@ class ArticleController extends Controller
                 'sound' => 'default',
                 'badge' => 1
               ]
-            );*/
-
+            );
+          }
         }
+      }
 
-        return $this->render('index', [
-            'model' => $model,
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-            'cards' => $searchModel->cards(),
-        ]);
+      return $this->render('index', [
+          'model' => $model,
+          'searchModel' => $searchModel,
+          'dataProvider' => $dataProvider,
+          'cards' => $searchModel->cards(),
+      ]);
     }
 
     /**

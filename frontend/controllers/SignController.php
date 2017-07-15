@@ -21,19 +21,19 @@ class SignController extends ActiveController
         return $actions;
     }
 
-    public function actionCreate(){
-        
+    public function actionCreate()
+    {
         $model = new SignForm();
         if ($model->load(Yii::$app->request->post())) {
         	if(!$model->validate()) return $model->getErrors();
             if ($user = $model->signup()) {
             	if (Yii::$app->getUser()->login($user)) {
-                    \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+                    //\Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
                     return ['token' => $user->access_token];
                 }
             }
         }
-		\Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+		//\Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         return ['error' => 'Ошибка'];
     }
 

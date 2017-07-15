@@ -1,0 +1,11 @@
+.navbar-toggle {
+	display: none;
+}
+
+.google-play {
+	margin-left: -14px;
+}
+
+.google-play img {
+	width: 200px;
+}

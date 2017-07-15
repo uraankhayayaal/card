@@ -41,18 +41,40 @@ class Usercard extends \yii\db\ActiveRecord
         return [
             [[/*'user_id',*/ 'card_id', 'barFormatId', 'barCode'], 'required'],
             [['user_id', 'card_id', 'barFormatId', 'status', 'type'], 'integer'],
-            ['barCode', 'unique', 'targetAttribute' => ['barCode', 'card_id'],'message'=>'This bar code alredy has been taken'],
+            //['barCode', 'unique', 'targetAttribute' => ['barCode', 'card_id'],'message'=>'This bar code alredy has been taken'],
             [['number', 'description', 'barCode'], 'string', 'max' => 255],
             [['card_id'], 'exist', 'skipOnError' => true, 'targetClass' => Card::className(), 'targetAttribute' => ['card_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['created_at', 'updated_at', 'lastname'], 'safe'],
             ['type', 'validateHozMarket'],
+            ['barCode', 'validateBarCode'],
         ];
+    }
+
+    public function validateBarCode($attribute, $params)
+    {
+        if (static::find()->where(['user_id' => Yii::$app->user->identity->id, 'card_id' => $this->card_id, 'barCode' => $this->barCode])->one()) {
+            $this->addError($attribute, 'To you already assigned to the barcode');
+            return false;
+        }
+        $count = static::find()->where(['card_id' => $this->card_id, 'barCode' => $this->barCode])->count();
+        if ($count < 3) {
+            return true;
+        }
+        $this->addError($attribute, 'This bar code alredy has been taken');
+        return false;
     }
 
     public function validateHozMarket($attribute, $params)
     {
         if ($this->type == 1) {
+            if (empty(str_replace(" ","",$this->lastname))) {
+                $this->addError($attribute, 'Unknown lastname');
+                return false;
+            }
+            if (strlen($this->barCode) < 5) {
+                $this->barCode = str_pad($this->barCode, 5, "0", STR_PAD_LEFT);
+            }
             if (Excel::find()->where(['card_number' => $this->barCode])->andFilterWhere(['like', 'name', $this->lastname])->exists()) {
                 return true;
             }

@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use yii\filters\AccessControl;
+use yii\helpers\Json;
 
 /**
  * CardController implements the CRUD actions for Card model.
@@ -86,16 +87,16 @@ class CardController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($company_id = null)
+    public function actionCreate()
     {
         $model = new Card();
-        if ($company_id != null) $model->company_id = $company_id;
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $name = \yii\helpers\Html::getInputName($model, 'path');
             $path = $this->uploadphoto(UploadedFile::getInstanceByName($name));
             $model->path = $path;
             $model->save();
-            return $this->redirect(['view', 'id' => $model->id]);
+            //return $this->redirect(['view', 'id' => $model->id]);
+            return Json::encode($model);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -114,7 +115,7 @@ class CardController extends Controller
         $newFileName = date("YmdHis").str_ireplace($rus, $lat, $file->name);
         $filePath = Yii::getAlias('@frontend') . '/web/img/' . $newFileName;
         if( $file->saveAs($filePath) ){
-            return 'http://card.dty.su/img/'.$newFileName;
+            return Yii::getAlias('@frontend-web') . '/img/'.$newFileName;
         }else return false;
         
         

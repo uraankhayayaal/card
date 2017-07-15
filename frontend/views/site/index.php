@@ -34,7 +34,7 @@ $this->title = 'DTY Card Картмоне - дисконтные карты в �
                         <div class="clear"></div>
                         <div class="links">
                             <a target="_blank" href="https://play.google.com/store/apps/details?id=ru.admin14.dtycard" class="btn gstore"></a>
-                            <a href="#" class="btn istore"></a>
+                            <a target="_blank" href="https://itunes.apple.com/ru/app/kartmone-diskontnye-karty/id1131181295" class="btn istore"></a>
                             <div class="clear"></div>
                         </div>
                         <div class="clear"></div>
@@ -86,7 +86,7 @@ $this->title = 'DTY Card Картмоне - дисконтные карты в �
                         <span class="line_decor">Будьте в курсе всех акций ваших любимых магазинов</span>
                         <div class="clear"></div>
                         <a target="_blank" href="https://play.google.com/store/apps/details?id=ru.admin14.dtycard" class="btn gstore"></a>
-                        <a href="#" class="btn istore"></a>
+                        <a target="_blank" href="https://itunes.apple.com/ru/app/kartmone-diskontnye-karty/id1131181295" class="btn istore"></a>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 phone_stack">
                         <img src="/images/andapp.png" class="img-responsive andapp_img" alt="Картмоне">
@@ -164,6 +164,12 @@ $this->title = 'DTY Card Картмоне - дисконтные карты в �
             <section class="footer text-center">
                 <div class="container">
                     <ul>
+                        <li><a class="white-text vk soc_settt" target="_blank" href="https://vk.com/overlordtrouble"></a></li>
+                        <li><a class="white-text fben soc_settt" target="_blank" href="https://www.facebook.com/Overlord-Trouble-1599519400344073/"></a></li>
+                        <li><a class="white-text ytor soc_settt" target="_blank" href="https://www.youtube.com/channel/UCf5Fx7uPxMKJUzxy5qZbmBQ"></a></li>
+                        <li><a class="white-text twin soc_settt" target="_blank" href="https://twitter.com/OverlordTrouble"></a></li>
+                    </ul>
+                    <ul>
                         <li class="pull-left text-left">
                             <a target="_blank" href="/privacy">Разрешение на обработку персональных данных</a><br/>
                         </li>
@@ -185,7 +191,7 @@ $this->title = 'DTY Card Картмоне - дисконтные карты в �
                             По всем другим вопросам обращаться: <a href="mailto:info@dty.su" target="_top">info@dty.su</a><br/>
                         </li>
                         <li class="pull-right text-right">
-                            Card DTY Картмоне, <a target="_blank" href="http://dty.su">&copy; Цифровые технологии Якутии, <?= date(Y) ?></a>
+                            Card DTY Картмоне, <a target="_blank" href="http://dty.su">&copy; Цифровые технологии Якутии, <?= date("Y") ?></a>
                         </li>
                         <div class="clear"></div>
                     </ul>

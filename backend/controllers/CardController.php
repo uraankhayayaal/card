@@ -67,7 +67,16 @@ class CardController extends Controller
      */
     public function actionView($id)
     {
+        $query = \common\models\Usercard::find()->where(['card_id' => $id]);
+        $dataProvider = new \yii\data\ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 60,
+            ],
+        ]);
+        
         return $this->render('view', [
+            'dataProvider' => $dataProvider,
             'model' => $this->findModel($id),
         ]);
     }
@@ -106,9 +115,7 @@ class CardController extends Controller
         $filePath = Yii::getAlias('@frontend') . '/web/img/' . $newFileName;
         if( $file->saveAs($filePath) ){
             return 'http://card.dty.su/img/'.$newFileName;
-        }else return false;
-        
-        
+        }else return false;    
     }
 
     /**

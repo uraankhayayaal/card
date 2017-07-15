@@ -5,10 +5,13 @@ use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\data\ActiveDataProvider;
 use common\models\LoginForm;
 use common\models\PasswordResetRequestForm;
 use common\models\ResetPasswordForm;
 use common\models\SignupForm;
+use common\models\User;
+use cabinet\models\Company;
 
 /**
  * Site controller
@@ -25,7 +28,7 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'signup', 'requestPasswordReset', 'resetPassword', 'error'],
+                        'actions' => ['login', 'signup', 'requestPasswordReset', 'resetPassword', 'error', 'confirm-email'],
                         'allow' => true,
                     ],
                     [
@@ -59,20 +62,29 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        $model = new \cabinet\models\Company();
-        $searchModel = new \cabinet\models\CompanySearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $model = new Company();
+        //$searchModel = new \cabinet\models\CompanySearch();
+        //$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        $query = Company::find()->where(['user_id' => Yii::$app->user->identity->id]);
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 60,
+            ],
+        ]);
 
         if ($model->load(Yii::$app->request->post()) && $model->validate())
         {
             $model->user_id = Yii::$app->user->identity->id;
             $model->save();
-            $model = new \cabinet\models\Company(); //reset model
+            $model = new Company(); //reset model
         }
 
         return $this->render('index', [
             'model' => $model,
-            'searchModel' => $searchModel,
+            //'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -139,7 +151,7 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
                 if (Yii::$app->getUser()->login($user)) {
-                    return $this->goHome();
+                    Yii::$app->session->setFlash('success', 'Для того что бы завершить регистрацию пройдите по указанному Вами E-mail по подтвердите адрес.');
                 }
             }
         }
@@ -196,5 +208,19 @@ class SiteController extends Controller
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
+    }
+
+    public function actionConfirmEmail($email, $token)
+    {
+        if ($user = User::find()->where(['email' => $email, 'password_reset_token' => $token])->one()) {
+            $user->status = User::STATUS_NOT_CONFIRM_ADMIN;
+            if ($user->save()) {
+                Yii::$app->session->setFlash('success', 'Спасибо что подтвердили E-mail. Теперь вы можете <a href="/cabinet/login">войти на сайт</a>.');
+                return $this->render('confirmEmail');
+            }
+        }
+
+        Yii::$app->session->setFlash('error', 'Error.');
+        return $this->render('confirmEmail');
     }
 }

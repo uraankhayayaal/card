@@ -3,7 +3,7 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use backend\assets\AppAsset;
+use cabinet\assets\AppAsset;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
@@ -30,7 +30,7 @@ AppAsset::register($this);
     if (!Yii::$app->user->isGuest) {
 
         NavBar::begin([
-            'brandLabel' => 'My Company',
+            'brandLabel' => 'Кабинет',
             'brandUrl' => Yii::$app->homeUrl,
             'options' => [
                 'class' => 'navbar-inverse navbar-fixed-top',
@@ -40,13 +40,16 @@ AppAsset::register($this);
             
         ];
         
-        $menuItems[] = ['label' => 'Мои магазины', 'url' => ['/site/index']];
+        $menuItems[] = ['label' => 'Мои предприятия', 'url' => ['/site/index']];
         $menuItems[] = ['label' => 'Новости', 'url' => ['/article/index']];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
                 'Выйти (' . Yii::$app->user->identity->email . ')',
-                ['class' => 'btn btn-link']
+                [
+                    'class' => 'btn btn-link',
+                    'style' => 'margin-top: 6px;'
+                ]
             )
             . Html::endForm()
             . '</li>';
